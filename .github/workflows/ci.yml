@@ -19,7 +19,7 @@ jobs:
     - name: Set up Python
       uses: actions/setup-python@v4
       with:
-        python-version: '3.12.4'
+        python-version: '3.10'
 
     - name: Install dependencies
       run: |
@@ -29,8 +29,6 @@ jobs:
     - name: Run tests
       run: |
           pytest tests --browser=chrome --html=reportes/reporte_test_saucedemo.html
-      env:
-          DISPLAY: :99
 
 
     - name: Upload test report
