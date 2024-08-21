@@ -28,10 +28,13 @@ jobs:
 
     - name: Run tests
       run: |
-        pytest tests --browser=chrome --html=reportes/reporte_pruebas.html
+          pytest tests --browser=chrome --html=reportes/reporte_test_saucedemo.html
+      env:
+          DISPLAY: :99
+
 
     - name: Upload test report
       uses: actions/upload-artifact@v3
       with:
         name: test-report
-        path: reportes/reporte_pruebas.html
+        path: reportes/reporte_test_saucedemo.html
