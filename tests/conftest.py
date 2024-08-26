@@ -1,4 +1,5 @@
 import pytest
+import json
 from selenium import webdriver
 from selenium.webdriver.chrome.options import Options as ChromeOptions
 from selenium.webdriver.firefox.options import Options as FirefoxOptions
@@ -18,7 +19,7 @@ def setup(request):
     if browser == "chrome":
         options = ChromeOptions()
         # Descomentar la siguiente línea para ejecutar en modo headless (sin interfaz gráfica)
-        options.add_argument("--headless")
+        # options.add_argument("--headless")
         driver = webdriver.Chrome(service=ChromeService(ChromeDriverManager().install()), options=options)
 
     
@@ -37,3 +38,19 @@ def setup(request):
     request.cls.wait = WebDriverWait(driver, 10)  # Espera explícita configurada a 10 segundos
     yield driver
     driver.quit()
+
+# Fixture para cargar credenciales
+@pytest.fixture(scope="session")
+def credentials():
+    with open("data/credentials.json") as json_file:
+        data = json.load(json_file)
+    return data
+
+# Limpieza de campos
+@pytest.fixture(scope="session")
+def clear_fields():
+    def _clear_fields(fields):
+        for field in fields:
+            if field.get_attribute("value"):
+                field.clear()
+    return _clear_fields
