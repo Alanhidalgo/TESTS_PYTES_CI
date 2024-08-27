@@ -3,7 +3,6 @@ from selenium.webdriver.chrome.webdriver import WebDriver  # Importar el tipo es
 from selenium.webdriver.common.by import By
 import time
 from selenium.webdriver.support import expected_conditions as EC
-from selenium.webdriver.support.ui import WebDriverWait
 
 @pytest.mark.usefixtures("setup")
 class TestSaucedemo:
